@@ -1,0 +1,69 @@
+<div class="container">
+    
+
+    <div class="row">
+        <div class="col-sm-12" style="background-color:lightblue;">
+            <h2>Will I make the top?</h2>
+            <p>
+                So, you want to know if you gonna make it to top? Give us numbers and we will do the math.
+            </p>
+            <form #form="ngForm" (ngSubmit)="onSubmit(form);">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label for="NumberOfPlayers">Number of players:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group" [class.has-error]="NumberOfPlayers.invalid && NumberOfPlayers.touched">
+                            <input #NumberOfPlayers="ngModel" type="tel" pattern="^[0-9]*$" required class="form-control" id="NumberOfPlayers" name="NumberOfPlayers"
+                                [(ngModel)]="inputModel.NumberOfPlayers">
+                            <div *ngIf="NumberOfPlayers.invalid && NumberOfPlayers.touched" class="alert alert-danger">
+                                Number of players required!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-xs-12">
+                        <label for="NumberOfRounds">Number of rounds:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group" [class.has-error]="NumberOfRounds.invalid && NumberOfRounds.touched">
+                            <input #NumberOfRounds="ngModel" type="tel" pattern="^[0-9]*$" required class="form-control" id="NumberOfRounds" name="NumberOfRounds"
+                                [(ngModel)]="inputModel.NumberOfRounds">
+                            <div *ngIf="NumberOfRounds.invalid && NumberOfRounds.touched" class="alert alert-danger">
+                                Number of rounds required!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label for="SizeOfTop">Top:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                        <select class="form-control" name="SizeOfTop" id="SizeOfTop" [(ngModel)]="inputModel.SizeOfTop">
+                            <option>4</option>
+                            <option>8</option>
+                            <option>16</option>
+                            <option>32</option>
+                            <option>64</option>
+                        </select>
+                    </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" [disabled]="form.invalid" class="btn btn-primary pull-right">Send</button>
+                </div>
+            </form>
+</div>
+</div>
+</div>
