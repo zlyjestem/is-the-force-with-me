@@ -11,7 +11,8 @@ import {MathInput} from '../models/mathInput.model'
 export class HomeComponent {
   //public mathInput = { NumberOfPlayers: undefined, NumberOfRounds: undefined, SizeOfTop: undefined };
   inputModel = new MathInput(null,null,null);
-  result = [];
+  winDistrubution = [];
+  calculatedTop = [];
 
   constructor(private doTheMath: DoTheMath) {
     
@@ -25,8 +26,8 @@ export class HomeComponent {
     //console.log(this.inputModel.NumberOfRounds);
     //console.log("Size of top:")
     //console.log(this.inputModel.SizeOfTop);
-    this.result = this.doTheMath.calaculateTop(this.inputModel);
-    console.log('from service:', this.result)
-
+    this.winDistrubution = this.doTheMath.calaculateWinDistrubution(this.inputModel);
+    console.log('winDistrubution', this.winDistrubution);
+   
     }
 }

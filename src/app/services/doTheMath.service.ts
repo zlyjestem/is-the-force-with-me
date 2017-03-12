@@ -7,32 +7,43 @@ import { MathInput } from '../models/mathInput.model';
 
 @Injectable()
 export class DoTheMath {
+    winDistribution = [];
     result = [];
     previousResult = [];
     constructor(private http: Http){
     }
 
     
-    calaculateTop(mathInput: MathInput){
+    calaculateWinDistrubution(mathInput: MathInput){
+        this.winDistribution = [];
         this.result = [];
-        console.log('MathInput in service', mathInput);
-        this.result[0] = mathInput.NumberOfPlayers;
+        this.winDistribution[0] = mathInput.NumberOfPlayers;
         for(var i = 1; i <= mathInput.NumberOfRounds; i++){
-            var tempFirstRoundUpper = Math.ceil(this.result[i-1]/2);
-            var tempFirstRoundDown = Math.floor(this.result[i-1]/2);
-            this.result[i] = tempFirstRoundUpper;
-            this.result[i-1] = tempFirstRoundDown;
+            var tempScoreFirstRound = this.winDistribution[i-1]/2;
+            this.winDistribution[i] = tempScoreFirstRound;
+            this.winDistribution[i-1] = tempScoreFirstRound;
             if (i >= 2){
                 for (var k = i-2; k>=0; k--){
-                    var tempUpper = Math.ceil(this.result[k]/2);
-                    var tempDown = Math.floor(this.result[k]/2)
-                    this.result[k+1] = this.result[k+1]+tempUpper;
-                    this.result[k] = this.result[k]-tempDown;
+                    var tempScoreFollowingRounds = this.winDistribution[k]/2;
+                    this.winDistribution[k+1] = this.winDistribution[k+1]+tempScoreFollowingRounds;
+                    this.winDistribution[k] = this.winDistribution[k]-tempScoreFollowingRounds;
                 }
             }
         }
+        for (var l=0; l < this.winDistribution.length; l++){
+            this.result.push(0);
+        }
+        for (var j = this.result.length-1; j>=0; j--){
+            if (mathInput.SizeOfTop >= 0){
+                this.result[j] = mathInput.SizeOfTop/this.winDistribution[j];
+                if (this.result[j] >= 1){
+                    this.result[j] = 100;
+                } else {
+                    this.result[j] = this.result[j] * 100;
+                }
+                mathInput.SizeOfTop = mathInput.SizeOfTop - this.winDistribution[j];    
+            }
+        }
         return this.result;
-
     }
-
 }

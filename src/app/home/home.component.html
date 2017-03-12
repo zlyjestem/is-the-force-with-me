@@ -19,7 +19,7 @@
                             <input #NumberOfPlayers="ngModel" type="tel" pattern="^[0-9]*$" required class="form-control" id="NumberOfPlayers" name="NumberOfPlayers"
                                 [(ngModel)]="inputModel.NumberOfPlayers">
                             <div *ngIf="NumberOfPlayers.invalid && NumberOfPlayers.touched" class="alert alert-danger">
-                                Number of players required!
+                                Number of players is required!
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                             <input #NumberOfRounds="ngModel" type="tel" pattern="^[0-9]*$" required class="form-control" id="NumberOfRounds" name="NumberOfRounds"
                                 [(ngModel)]="inputModel.NumberOfRounds">
                             <div *ngIf="NumberOfRounds.invalid && NumberOfRounds.touched" class="alert alert-danger">
-                                Number of rounds required!
+                                Number of rounds is required!
                             </div>
                         </div>
                     </div>
@@ -49,14 +49,16 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="form-group">
-                        <select class="form-control" name="SizeOfTop" id="SizeOfTop" [(ngModel)]="inputModel.SizeOfTop">
-                            <option>4</option>
-                            <option>8</option>
-                            <option>16</option>
-                            <option>32</option>
-                            <option>64</option>
+                        <select class="form-control" name="SizeOfTop" id="SizeOfTop" required [(ngModel)]="inputModel.SizeOfTop">
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="8">8</option>
+                            <option value="16">16</option>
+                            <option value="32">32</option>
+                            <option value="64">64</option>
                         </select>
-                    </div>
+                        </div>
+                       
                     </div>
                 </div>
 
