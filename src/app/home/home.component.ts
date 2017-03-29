@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import {DoTheMath} from '../services/doTheMath.service';
 import {MathInput} from '../models/mathInput.model';
 import {WinNumber} from '../models/winNumber.Model';
+//import {currency} from '@angular/'
 
 @Component({
   selector: 'home',
@@ -12,7 +13,8 @@ import {WinNumber} from '../models/winNumber.Model';
 export class HomeComponent {
   inputModel = new MathInput(null,null,8);
   winDistrubution: Array<Number>;
-  calculatedTop= [];
+  calculatedTop = [];
+  compactResult = [];
   private inputMode: boolean;
 
   constructor(private doTheMath: DoTheMath) {
@@ -26,10 +28,7 @@ export class HomeComponent {
 
   onSubmit(form: any) {
     this.winDistrubution = this.doTheMath.calaculateWinDistrubution(this.inputModel);
-    //console.log('winDistrubution', this.winDistrubution);
-    this.calculatedTop = this.doTheMath.formatResult(this.winDistrubution);
+    this.compactResult = this.doTheMath.compactResult(this.winDistrubution);
     this.inputMode = false;
-    //console.log('calculated top', this.calculatedTop);
-   
     }
 }

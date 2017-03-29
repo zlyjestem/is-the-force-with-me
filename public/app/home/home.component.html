@@ -1,11 +1,14 @@
-<div>
-    <img src="/img/logo.png" class="img img-responsive" alt="Is the force with me?">
+<div class="row" style="margin:0.5em">
+    <div class="col-xs-12">
+        <img src="/img/logo.png" class="img img-responsive" alt="Is the force with me?">
+    </div>
+    
 </div>
 <div class="container" style="border: 2px solid yellow;
     border-radius: 15px; background-color:lightgrey;">
     <div class="row" *ngIf="inputMode">
         <div class="col-sm-12" >
-            <h2>Will I make the top?</h2>
+            <h3>Will I make the top?</h3>
             <p>
                 So, you want to know if you gonna make it to top? Give us numbers and we will do the math.
             </p>
@@ -65,11 +68,15 @@
                 </div>
                 <hr>
 
-                <div>
-                    <button type="submit" [disabled]="form.invalid" class="btn btn-primary pull-right">
-                        <i class="swg swg-falcon swg-lg swg-2x"></i>
-                            <strong>I have bad feelings about this...</strong>
-                    </button>
+                <div class="row"  style="margin-bottom:1em">
+                    <div class="col-xs-12">
+                        <div>
+                            <button type="submit" [disabled]="form.invalid" class="btn btn-primary pull-right">
+                                <i class="swg swg-falcon swg-lg swg-2x"></i>
+                                    <strong>I have bad feelings about this...</strong>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -78,20 +85,40 @@
     <div class="row" *ngIf="!inputMode">
         <div class="col-sm-12">
             <h3>Results</h3>
-            <div  *ngFor="let result of calculatedTop">
-                <h6>With {{result.NumberOfWins}} wins you have {{result.Probability}}% to get top</h6>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped active" [ngClass]="result.Display" role="progressbar" [ngStyle]="{'width': result.Probability+'%'}">
-                        With {{result.NumberOfWins}} wins you have {{result.Probability}}% to get top
+            <div class="row">
+                <div class="col-xs-12">
+                    <div  *ngFor="let result of compactResult">
+                        <h5><strong>{{result.Header}}</strong></h5>
+                        <div *ngIf="!result.CombinedProgress" class="progress">
+                            <div class="progress-bar progress-bar-striped active" [ngClass]="result.Display" role="progressbar" style="width:100%">
+                                {{result.Label}}
+                            </div>
+                        </div>
+                        <div *ngIf="result.CombinedProgress" class="progress">
+                            <div class="progress-bar progress-bar-striped active progress-bar-success" role="progressbar" [ngStyle]="{'width': result.Probability+'%'}">
+                                <div>{{result.Label}}</div>
+                            </div>
+                            <div class="progress-bar progress-bar-striped active progress-bar-danger" role="progressbar" [ngStyle]="{'width': 100-result.Probability+'%'}">
+                                <div>{{result.Label}}</div>
+                            </div>
+                            
+                        </div>
+
                     </div>
                 </div>
             </div>
-            <div>
-                <button (click)="recalculateClick()" class="btn btn-primary pull-right">
-                    <i class="swg swg-c3po swg-lg swg-2x"></i>
-                    Never tell me the odds
-                </button>
+            <hr>
+            <div class="row" style="margin-bottom:1em">
+                <div class="col-xs-12">
+                    <div>
+                        <button (click)="recalculateClick()" class="btn btn-primary pull-right">
+                            <i class="swg swg-c3po swg-lg swg-2x"></i>
+                                <strong>Never tell me the odds</strong>
+                        </button>
+                    </div>
+                </div>
             </div>
-        <div>
+
+        </div>
     </div>
 </div>
