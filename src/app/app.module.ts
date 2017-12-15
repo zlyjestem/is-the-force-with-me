@@ -10,6 +10,9 @@ import { HomeComponent } from './home/home.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { DoTheMath } from './services/doTheMath.service';
 
+import { enableProdMode } from '@angular/core';
+enableProdMode();
+
 @NgModule({
   declarations: [
     AppComponent,
